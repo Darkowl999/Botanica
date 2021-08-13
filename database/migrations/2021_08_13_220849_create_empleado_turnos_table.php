@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePedidosTable extends Migration
+class CreateEmpleadoTurnosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePedidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pedidos', function (Blueprint $table) {
+        Schema::create('empleado_turnos', function (Blueprint $table) {
             $table->id();
             //este es el foreing key
             $table->unsignedBigInteger("user_id");
@@ -21,14 +21,13 @@ class CreatePedidosTable extends Migration
                 ->on("users")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            //forrane para mesa
-            $table->unsignedBigInteger("mesa_id");
-            $table->foreign("mesa_id")->references("id")
-                ->on("mesas")
+            //este es el foreing key
+            $table->unsignedBigInteger("turno_id");
+            $table->foreign("turno_id")->references("id")
+                ->on("turnos")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
-
         });
     }
 
@@ -39,6 +38,6 @@ class CreatePedidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidos');
+        Schema::dropIfExists('empleado_turnos');
     }
 }

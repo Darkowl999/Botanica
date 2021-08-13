@@ -17,6 +17,28 @@ class CreateRecibosTable extends Migration
             $table->id();
             $table->date('fecha');
             $table->float('total');
+
+            //este es el foreing key
+            $table->unsignedBigInteger("user_id");
+            $table->foreign("user_id")->references("id")
+                ->on("users")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->unsignedBigInteger("mesa_id");
+            $table->foreign("mesa_id")->references("id")
+                ->on("mesas")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->unsignedBigInteger("pedido_id");
+            $table->foreign("pedido_id")->references("id")
+                ->on("pedidos")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->timestamps();
+
+
+
+
         });
     }
 

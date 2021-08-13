@@ -18,6 +18,15 @@ class CreateReservasTable extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->integer('cant_personas');
+
+
+            //este es el foreing key
+            $table->unsignedBigInteger("user_id");
+            $table->foreign("user_id")->references("id")
+                ->on("users")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->timestamps();
         });
     }
 

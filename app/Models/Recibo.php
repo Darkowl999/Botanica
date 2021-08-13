@@ -11,6 +11,9 @@ class Recibo extends Model
     protected $table='recibos';
     protected $fillable = [
         'fecha',
-        'total'
+        'total',
+        'user_id',
+        'mesa_id',
+        'pedido_id'
     ];
 }

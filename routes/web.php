@@ -23,10 +23,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('/users',\App\Http\Livewire\User\Lista::class)->name("Users");
+    Route::get('/mesas',\App\Http\Livewire\Mesa::class)->name("Mesas");
 });
-Route::get('/form', function () {
-    return ('hola mundo');
-});
+
+
+
 
 
 
