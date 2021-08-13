@@ -17,6 +17,16 @@ class CreateMesasTable extends Migration
             $table->id();
             $table->integer('capacidad');
             $table->string('estado');
+
+
+            //este es el foreing key
+            $table->unsignedBigInteger("area_id");
+            $table->foreign("area_id")->references("id")
+                ->on("areas")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+                $table->timestamps();
+
         });
     }
 
