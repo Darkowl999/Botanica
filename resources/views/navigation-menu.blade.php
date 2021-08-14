@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-gray-700 border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -17,8 +17,21 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('Users') }}" :active="request()->routeIs('Users')">
+                    <x-jet-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
                         {{ __('Usuarios') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('mesas') }}" :active="request()->routeIs('mesas')">
+                        {{ __('Mesas') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pedidos') }}" :active="request()->routeIs('pedidos')">
+                        {{ __('Pedidos') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('platos') }}" :active="request()->routeIs('platos')">
+                        {{ __('Platos') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
+                        {{ __('Reservas') }}
                     </x-jet-nav-link>
 
 
