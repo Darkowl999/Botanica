@@ -20,7 +20,7 @@ class CreateReservasTable extends Migration
             $table->integer('cant_personas');
             $table->string('estado');
             //En espera
-            //Termianda
+            //Concluida
 
             //este es el foreing key
             $table->unsignedBigInteger("user_id");

@@ -23,6 +23,7 @@ class LiveReserva extends Component
     public $hora;
     public $cant_personas;
     public $mesa_id;
+    public $estado;
 
 
     public function render()
@@ -30,7 +31,8 @@ class LiveReserva extends Component
         $user = Auth::user();
         $roles = explode(',', $user->rol);
         if ($roles[2] == '0' && $roles[2] == '0') {
-            $this->reservas = Reserva::where('user_id', $user->id)->get();
+            $this->reservas = Reserva::where('user_id', $user->id)
+                ->get();
         } else {
             $this->reservas = Reserva::all();
         }
@@ -65,14 +67,14 @@ class LiveReserva extends Component
                 $this->reserva_actual->fecha = $this->fecha;
                 $this->reserva_actual->hora = $this->hora;
                 $this->reserva_actual->cant_personas = $this->cant_personas;
-                $this->reserva_actual->estado = 'En espera';
+                $this->reserva_actual->estado = $this->estado;
                 $this->reserva_actual->user_id = Auth::user()->id;
                 $this->reserva_actual->mesa_id = $this->mesa_id;
                 $this->reserva_actual->save();
 
 
                 $mesa = Mesa::find($this->mesa_id);
-                $mesa->estado = 'Reservado';
+                $mesa->estado = $this->estado=='Concluida'?'Ocupado':'Reservado';
                 $mesa->save();
             }
         } catch (\Exception $e) {
@@ -86,8 +88,10 @@ class LiveReserva extends Component
         $this->editar = $reserva_id != 0;;
         if ($this->editar) {
             $this->reserva_actual = Reserva::find($reserva_id);
+
             $this->fecha=$this->reserva_actual->fecha;
             $this->hora=$this->reserva_actual->hora;
+            $this->estado = $this->reserva_actual->estado;
             $this->cant_personas=$this->reserva_actual->cant_personas;
             $this->mesa_id=$this->reserva_actual->mesa_id;
         }

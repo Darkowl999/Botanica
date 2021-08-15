@@ -26,6 +26,18 @@
                                  type="number" name="cant_personas" required/>
                 </div>
 
+                @if($editar)
+                    <x-jet-label for="estado" value="{{ __('Estado') }}"/>
+
+                    <select wire:model="estado" name="mesa_id" id="estado" required
+                            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option value="{{'En espera'}}" {{$reserva_actual->estado=='En espera'?'selected':''}}>En espera</option>
+                            <option value="{{'Concluida'}}" {{$reserva_actual->estado=='Concluida'?'selected':''}}>Concluida</option>
+
+                    </select>
+                @endif
+
+
                 <div>
                     <x-jet-label for="mesa_id" value="{{ __('Mesa') }}"/>
                     @if($mesas_disponibles->isNotEmpty())
@@ -80,6 +92,7 @@
                             <th class="px-4 py-3">Hora</th>
                             <th class="px-4 py-3">Cant. de personas</th>
                             <th class="px-4 py-3">Mesa</th>
+                            <th class="px-4 py-3">Estado</th>
                             <th class="px-4 py-3"></th>
                         </tr>
                         </thead>
@@ -103,9 +116,13 @@
                                     <p class="font-semibold text-black">{{$reserva->mesa_id}}</p>
                                 </td>
                                 <td class="px-4 py-3 text-ms font-semibold border">
+                                    <p class="font-semibold text-black">{{$reserva->estado}}</p>
+                                </td>
+                                <td class="px-4 py-3 text-ms font-semibold border">
+                                    @if($reserva->estado!='Concluida')
                                     <x-jet-button wire:click="eliminar({{$reserva->id}})">Eliminar</x-jet-button>
                                     <x-jet-button wire:click="modal({{$reserva->id}})">Actualizar</x-jet-button>
-
+                                    @endif
                                 </td>
 
 

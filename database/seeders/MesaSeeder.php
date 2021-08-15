@@ -16,12 +16,12 @@ class MesaSeeder extends Seeder
     {
         Mesa::create([
             'capacidad'=>4,
-            'estado'=>'Reservado',
+            'estado'=>'Libre',
             'area_id'=>2
         ]);
         Mesa::create([
             'capacidad'=>4,
-            'estado'=>'Reservado',
+            'estado'=>'Libre',
             'area_id'=>1
         ]);
         Mesa::create([
