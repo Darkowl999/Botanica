@@ -26,5 +26,25 @@ class UserSeeder extends Seeder
             'rol'=>'1,0,0'
         ]);
 
+        User::create([
+            'name'=>'pedro',
+            'email'=>'pedro@gmail.com',
+            'password'=>Hash::make('password'),
+            'direccion'=>'av los palotes',
+            'estado'=>true,
+            'telefono'=>65203120,
+            'rol'=>'1,0,0'
+        ]);
+
+        User::create([
+            'name'=>'jose',
+            'email'=>'jose@gmail.com',
+            'password'=>Hash::make('password'),
+            'direccion'=>'av los palotes',
+            'estado'=>true,
+            'telefono'=>65203120,
+            'rol'=>'1,0,0'
+        ]);
+
     }
 }

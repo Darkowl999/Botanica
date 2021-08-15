@@ -36,8 +36,8 @@
 
                     <select wire:model="estado" name="mesa_id" id="estado" required
                             class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                        <option value="{{'Disponible'}}" {{$plato_actual->estado=='Disponible'?'selected':''}}>Disponible</option>
-                        <option value="{{'Agotado'}}" {{$plato_actual->estado=='Agotado'?'selected':''}}>Agotado</option>
+                        <option value="{{'Agotado'}}">Agotado</option>
+                        <option value="{{'Disponible'}}">Disponible</option>
 
                     </select>
                 @endif
@@ -65,7 +65,7 @@
                 Cerrar
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="elimiarReserva" wire:loading.attr="disabled">
+            <x-jet-danger-button class="ml-2" wire:click="elimiarPlato" wire:loading.attr="disabled">
                 Eliminar
             </x-jet-danger-button>
         </x-slot>
@@ -116,8 +116,6 @@
 
                         </tr>
                     @endforeach
-                    <!--fin for each-->
-
                     </tbody>
                 </table>
             </div>

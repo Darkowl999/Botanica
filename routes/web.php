@@ -22,7 +22,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum'])->group( function () {
-    Route::get('/users',\App\Http\Livewire\User\Lista::class)->name("users");
+    Route::get('/users',\App\Http\Livewire\User\LiveUser::class)->name("users");
     Route::get('/mesas',\App\Http\Livewire\Mesa\LiveMesa::class)->name("mesas");
     Route::get('/pedidos',\App\Http\Livewire\Pedido\LivePedido::class)->name("pedidos");
     Route::get('/platos',\App\Http\Livewire\Plato\LivePlato::class)->name("platos");

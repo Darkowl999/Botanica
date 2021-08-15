@@ -1,6 +1,84 @@
 <div>
     {{-- Be like water. --}}
     <!--Este componente es de tailwind css -->
+        <x-jet-dialog-modal wire:model="modal" wire:click="$toggle('modal')">
+            <x-slot name="title">
+                Editar usuario
+            </x-slot>
+
+            <x-slot name="content">
+                <form wire:submit.prevent="crear" class="px-10">
+                    <div>
+                        <x-jet-label for="name" value="{{ __('Nombre') }}"/>
+                        <x-jet-input id="name" wire:model="name" class="block mt-1 w-full"
+                                     type="text" name="name" required/>
+                    </div>
+                    <div>
+                        <x-jet-label for="email" value="{{ __('Correo') }}"/>
+                        <x-jet-input id="email" wire:model="email" class="block mt-1 w-full"
+                                     type="email" name="email" required/>
+                    </div>
+
+                    <div>
+                        <x-jet-label for="direccion" value="{{ __('Direccion') }}"/>
+                        <x-jet-input id="direccion" wire:model="direccion" class="block mt-1 w-full"
+                                     type="text" name="direccion" required/>
+                    </div>
+                        <x-jet-label for="estado" value="{{ __('Estado') }}"/>
+                    @if($editar)
+                        <select wire:model="estado" name="estado" id="estado" required
+                                class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option value="{{1}}">Activo</option>
+                            <option value="{{0}}">Inactivo</option>
+                        </select>
+                    @endif
+                    <div>
+                        <x-jet-label for="telefono" value="{{ __('Teléfono') }}"/>
+                        <x-jet-input id="telefono" wire:model="telefono" class="block mt-1 w-full"
+                                     type="number" name="telefono" required/>
+                    </div>
+
+                    @if($editar)
+                    <div>
+                        <x-jet-label for="rol" value="{{ __('Rol') }}"/>
+                        <select wire:model="rol" name="rol" id="rol" required
+                                class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option value="{{'1,0,0'}}">Administrador</option>
+                            <option value="{{'0,2,0'}}">Empleado</option>
+                            <option value="{{'0,0,3'}}">Cliente</option>
+                        </select>
+                    </div>
+                    @endif
+
+                    <div class="flex justify-center pt-5">
+                        <x-jet-button wire:click="$toggle('modal')">Guardar</x-jet-button>
+                    </div>
+                </form>
+            </x-slot>
+            <x-slot name="footer">
+            </x-slot>
+        </x-jet-dialog-modal>
+
+        <x-jet-confirmation-modal wire:model="eliminar">
+            <x-slot name="title">
+                Eliminar
+            </x-slot>
+
+            <x-slot name="content">
+                ¿Esta seguro que desea eliminar?
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('eliminar')" wire:loading.attr="disabled">
+                    Cerrar
+                </x-jet-secondary-button>
+
+                <x-jet-danger-button class="ml-2" wire:click="eliminarUser" wire:loading.attr="disabled">
+                    Eliminar
+                </x-jet-danger-button>
+            </x-slot>
+        </x-jet-confirmation-modal>
+
         <section class="container mx-auto p-6 font-mono">
             <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
                 <div class="w-full">
@@ -59,10 +137,10 @@
 
                             </td>
                             <td class="px-4 py-3 text-ms font-semibold border">
-                                <x-jet-button wire:click="eliminars({{$user->id}})">Eliminar</x-jet-button>
-                                <x-jet-button wire:click="eliminar({{$user->id}})">Crear</x-jet-button>
-                                <x-jet-button wire:click="eliminar({{$user->id}})">Actualizar</x-jet-button>
-
+                                @if(\Illuminate\Support\Facades\Auth::user()->id!=$user->id)
+                                <x-jet-button wire:click="eliminar({{$user->id}})">Eliminar</x-jet-button>
+                                <x-jet-button wire:click="modal({{$user->id}})">Actualizar</x-jet-button>
+                                @endif
                             </td>
 
 

@@ -80,7 +80,7 @@ class LivePlato extends Component
         $this->plato_actual = Plato::find($plato_id);
         $this->eliminar=true;
     }
-    public function elimiarReserva(){
+    public function elimiarPlato(){
         $this->plato_actual->delete();
         $this->eliminar=false;
     }
