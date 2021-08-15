@@ -29,7 +29,7 @@ class LivePlato extends Component
 
     public function crear()
     {
-        //try {
+        try {
             if ($this->crear) {
                 Plato::create([
                     'nombre' => $this->nombre,
@@ -47,9 +47,9 @@ class LivePlato extends Component
                 $this->plato_actual->save();
 
             }
-        /*} catch (\Exception $e) {
+        } catch (\Exception $e) {
 
-        }*/
+        }
     }
 
     public function modal($plato_id)
