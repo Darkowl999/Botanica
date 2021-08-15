@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             AreaSeeder::class,
-            MesaSeeder::class
+            MesaSeeder::class,
+
+            PlatoSeeder::class
             ]);
         // \App\Models\User::factory(10)->create();
     }

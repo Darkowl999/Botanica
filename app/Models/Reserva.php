@@ -13,6 +13,8 @@ class Reserva extends Model
         'fecha',
         'hora',
         'cant_personas',
-        'user_id'
+        'estado',
+        'user_id',
+        'mesa_id'
     ];
 }

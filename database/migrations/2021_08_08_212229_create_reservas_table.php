@@ -18,7 +18,9 @@ class CreateReservasTable extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->integer('cant_personas');
-
+            $table->string('estado');
+            //En espera
+            //Termianda
 
             //este es el foreing key
             $table->unsignedBigInteger("user_id");
@@ -26,6 +28,13 @@ class CreateReservasTable extends Migration
                 ->on("users")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger("mesa_id");
+            $table->foreign("mesa_id")->references("id")
+                ->on("mesas")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
             $table->timestamps();
         });
     }

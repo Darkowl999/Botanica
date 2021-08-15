@@ -16,10 +16,11 @@ class CreatePlatosTable extends Migration
         Schema::create('platos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->text('description');
+            $table->text('descripcion');
             $table->float('precio');
             $table->string('estado');
             $table->integer('cantidad');
+            $table->timestamps();
         });
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Pedido;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class LivePedido extends Component
 {
     public function render()
     {
-        return view('livewire.live-pedido');
+        return view('livewire.pedido.live-pedido');
     }
 }
