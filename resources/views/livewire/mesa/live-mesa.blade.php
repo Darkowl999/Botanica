@@ -72,12 +72,12 @@
                                      type="number" name="capacidad" required/>
                     </div>
                     <div>
-                        <x-jet-label for="area" value="{{ __('Area') }}"/>
-                        <select wire:model="area_id" name="area" id="area"
+                        <x-jet-label for="area_id" value="{{ __('Area') }}"/>
+                        <select wire:model="area_id" name="area_id" id="area_id"
                                 class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             @foreach($areas as $area)
                                 <option
-                                    value="{{$area->id}}" {{$area->id===$mesa->area_id?'selected':''}}>{{$area->nombre}}</option>
+                                    value="{{$area->id}}">{{$area->nombre}}</option>
                             @endforeach
                         </select>
 
