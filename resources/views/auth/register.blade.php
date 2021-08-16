@@ -15,6 +15,28 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="direccion" value="{{ __('Dirección') }}" />
+                <x-jet-input id="direccion" class="block mt-1 w-full" type="text" name="direccion" :value="old('name')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="telefono" value="{{ __('Teléfono') }}" />
+                <x-jet-input id="telefono" class="block mt-1 w-full" type="number" name="telefono" :value="old('name')" required autofocus autocomplete="name" />
+            </div >
+
+            <div class="mt-4">
+                <x-jet-label for="rol" value="{{ __('Rol') }}"/>
+                <select wire:model="rol" name="rol" id="rol" required
+                        class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    <option value="{{'1,0,0'}}" >Administrador</option>
+                    <option value="{{'0,2,0'}}" selected>Empleado</option>
+                    <option value="{{'0,0,3'}}">Cliente</option>
+                </select>
+            </div>
+
+
+
+            <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
