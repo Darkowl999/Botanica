@@ -33,6 +33,9 @@
                     <x-jet-nav-link href="{{ route('reservas') }}" :active="request()->routeIs('reservas')">
                         {{ __('Reservas') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('recibos') }}" :active="request()->routeIs('recibos')">
+                        {{ __('Recibos') }}
+                    </x-jet-nav-link>
 
 
 

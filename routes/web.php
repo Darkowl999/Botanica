@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('/pedidos',\App\Http\Livewire\Pedido\LivePedido::class)->name("pedidos");
     Route::get('/platos',\App\Http\Livewire\Plato\LivePlato::class)->name("platos");
     Route::get('/reservas',\App\Http\Livewire\Reserva\LiveReserva::class)->name("reservas");
+    Route::get('/recibos',\App\Http\Livewire\Recibo\LiveRecibo::class)->name("recibos");
 });
 
 
