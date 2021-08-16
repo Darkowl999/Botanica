@@ -38,7 +38,7 @@ class LiveReserva extends Component
         } else {
             $this->reservas = Reserva::all();
         }
-        $this->mesas_disponibles = Mesa::where('Estado', 'Libre')->get();
+        $this->mesas_disponibles = Mesa::where('estado', 'Libre')->get();
         return view('livewire.reserva.live-reserva');
     }
     public function reservar()
