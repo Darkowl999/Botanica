@@ -61,7 +61,7 @@
                     </div>
                 </section>
 
-                @if($pedido_actual!=null && $pedido_actual->activo)
+                @if(($pedido_actual!=null && $pedido_actual->activo)|| $crear)
                     <div class="flex justify-center pt-5">
                         <x-jet-button type="button" wire:click="$toggle('agregar')">Añadir plato</x-jet-button>
                     </div>
