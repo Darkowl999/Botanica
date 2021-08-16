@@ -26,7 +26,7 @@ class MesaSeeder extends Seeder
         ]);
         Mesa::create([
             'capacidad'=>4,
-            'estado'=>'Ocupado',
+            'estado'=>'Libre',
             'area_id'=>2
         ]);
         Mesa::create([
