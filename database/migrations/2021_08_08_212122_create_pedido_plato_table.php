@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePedidoPlatosTable extends Migration
+class CreatePedidoPlatoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatePedidoPlatosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pedido_platos', function (Blueprint $table) {
+        Schema::create('pedido_plato', function (Blueprint $table) {
             $table->id();
             $table->integer('cantidad');
-            $table->text('modificacion');
 
             //este es el foreing key
             $table->unsignedBigInteger("pedido_id");
@@ -44,6 +43,6 @@ class CreatePedidoPlatosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedido_platos');
+        Schema::dropIfExists('pedido_plato');
     }
 }

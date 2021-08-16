@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class PedidoPlato extends Model
 {
     use HasFactory;
-    protected $table='pedido_platos';
+    protected $table='pedido_plato';
     protected $fillable = [
         'cantidad',
-        'modificacion',
         'pedido_id',
         'plato_id'
     ];
+    public function pedidos()
+    {
+        return $this->belongsTo(Pedido::class);
+    }
 }

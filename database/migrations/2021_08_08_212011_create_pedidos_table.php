@@ -16,6 +16,7 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             //este es el foreing key
+            $table->boolean("activo");
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")
                 ->on("users")

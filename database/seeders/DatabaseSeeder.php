@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             AreaSeeder::class,
             MesaSeeder::class,
 
-            PlatoSeeder::class
+            PlatoSeeder::class,
+            TurnoSeeder::class,
             ]);
         // \App\Models\User::factory(10)->create();
     }

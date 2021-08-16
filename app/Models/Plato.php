@@ -16,4 +16,11 @@ class Plato extends Model
         'estado',
         'cantidad'
     ];
+
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class);
+    }
+
+
 }

@@ -10,9 +10,19 @@ class Pedido extends Model
     use HasFactory;
     protected $table='pedidos';
     protected $fillable = [
-        'id',
+        'activo',
         'user_id',
         'mesa_id'
 
     ];
+
+    public function platos()
+    {
+        return $this->belongsToMany(Plato::class);
+    }
+    public function pplatos()
+    {
+        return $this->hasMany(PedidoPlato::class);
+    }
+
 }

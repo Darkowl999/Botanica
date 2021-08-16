@@ -8,7 +8,7 @@
         <button
             class="w-24 h-10 bg-green-500 border border-black text-center text-white font-semibold rounded-md">{{'Reservado'}}</button>
         <button wire:click="$toggle('mesaNueva')"
-            class="w-24 h-10 bg-gray-700 border border-black text-center text-white font-semibold rounded-md">{{'Nueva mesa'}}</button>
+                class="w-24 h-10 bg-gray-700 border border-black text-center text-white font-semibold rounded-md">{{'Nueva mesa'}}</button>
     </div>
     <div class="grid grid-cols-8 gap-4">
         @foreach($mesas as $m)
@@ -65,46 +65,33 @@
             </x-slot>
 
             <x-slot name="content">
-                <div x-data="{active: 0}">
-                    <div class="flex border border-black rounded-t-md overflow-hidden -mb-px">
-                        <button class="px-4 py-2 w-full rounded-tl-md" x-on:click.prevent="active = 0"
-                                x-bind:class="{'bg-gray-700 text-white': active === 0}">Detalles
-                        </button>
-                        <button class="px-4 py-2 w-full rounded-tr-md" x-on:click.prevent="active = 1"
-                                x-bind:class="{'bg-gray-700 text-white': active === 1}">Editar
-                        </button>
+                <form wire:submit.prevent="editar" class="px-10">
+                    <div>
+                        <x-jet-label for="capacidad" value="{{ __('Capacidad') }}"/>
+                        <x-jet-input id="capacidad" wire:model="capacidad" class="block mt-1 w-full"
+                                     type="number" name="capacidad" required/>
                     </div>
-                    <div class="bg-white rounded-b-md border border-black -mt-px">
-                        <div class="p-4 space-y-2" x-show="active === 0">
+                    <div>
+                        <x-jet-label for="area" value="{{ __('Area') }}"/>
+                        <select wire:model="area_id" name="area" id="area"
+                                class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            @foreach($areas as $area)
+                                <option
+                                    value="{{$area->id}}" {{$area->id===$mesa->area_id?'selected':''}}>{{$area->nombre}}</option>
+                            @endforeach
+                        </select>
 
-                        </div>
-                        <div class="p-4 space-y-2" x-show="active === 1">
-
-                            <form wire:submit.prevent="editar" class="px-10">
-                                <div>
-                                    <x-jet-label for="capacidad" value="{{ __('Capacidad') }}"/>
-                                    <x-jet-input id="capacidad" wire:model="capacidad" class="block mt-1 w-full"
-                                                 type="number" name="capacidad" required/>
-                                </div>
-                                <div>
-                                    <x-jet-label for="area" value="{{ __('Area') }}"/>
-                                    <select wire:model="area_id" name="area" id="area"
-                                            class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                                        @foreach($areas as $area)
-                                            <option
-                                                value="{{$area->id}}" {{$area->id===$mesa->area_id?'selected':''}}>{{$area->nombre}}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="flex justify-between pt-5">
-                                <x-jet-button wire:click="eliminar" wire:click="$toggle('mesaModal')" type="button" class="order-first bg-red-500 hover:bg-red-400 focus:bg-red-700">Eliminar</x-jet-button>
-                                <x-jet-button wire:click="$toggle('mesaModal')" class="order-last">Guardar</x-jet-button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
-                </div>
+                    @if($mesa->estado==='Libre')
+                        <div class="flex justify-between pt-5">
+                            <x-jet-button wire:click="eliminar" wire:click="$toggle('mesaModal')" type="button"
+                                          class="order-first bg-red-500 hover:bg-red-400 focus:bg-red-700">Eliminar
+                            </x-jet-button>
+                            <x-jet-button wire:click="$toggle('mesaModal')" class="order-last">Guardar</x-jet-button>
+                        </div>
+                    @endif
+                </form>
+
             </x-slot>
 
             <x-slot name="footer">

@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'direccion'=>'av los palotes',
             'estado'=>true,
             'telefono'=>65203120,
-            'rol'=>'1,0,0'
+            'rol'=>'0,0,3'
         ]);
 
     }
