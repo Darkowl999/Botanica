@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Pedido;
 
+use App\Models\Bitacora;
 use App\Models\Mesa;
 use App\Models\Pedido;
 use App\Models\PedidoPlato;
 use App\Models\Plato;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LivePedido extends Component
@@ -75,7 +78,12 @@ class LivePedido extends Component
                     $plat->cantidad = $plat->cantidad - $p['cantidad'];
                     $plat->save();
                 }
-
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Creó un pedido',
+                    'user_id'=>Auth::user()->id
+                ]);
             } else {
                 $mesa = Mesa::find($this->pedido_actual->mesa_id);
                 $mesa->estado = 'Libre';
@@ -113,6 +121,14 @@ class LivePedido extends Component
                 $mesa = Mesa::find($this->pedido_actual->mesa_id);
                 $mesa->estado = 'Ocupado';
                 $mesa->save();
+
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Modificó un pedido',
+                    'user_id'=>Auth::user()->id
+                ]);
+
             }
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -160,6 +176,14 @@ class LivePedido extends Component
         $mesa->save();
 
         $this->pedido_actual->delete();
+
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Eliminó un pedido',
+            'user_id'=>Auth::user()->id
+        ]);
+
         $this->eliminar = false;
     }
 
@@ -200,5 +224,12 @@ class LivePedido extends Component
 
         $this->pedido_actual->activo=false;
         $this->pedido_actual->save();
+
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Cerró un pedido',
+            'user_id'=>Auth::user()->id
+        ]);
     }
 }

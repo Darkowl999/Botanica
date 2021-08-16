@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Reserva;
 
+use App\Models\Bitacora;
 use App\Models\Mesa;
 
 use App\Models\Reserva;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -59,6 +61,14 @@ class LiveReserva extends Component
                 $mesa = Mesa::find($this->mesa_id);
                 $mesa->estado = 'Reservado';
                 $mesa->save();
+
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Creó una reserva',
+                    'user_id'=>Auth::user()->id
+                ]);
+
             } else {
                 $mesa = Mesa::find($this->reserva_actual->mesa_id);
                 $mesa->estado = 'Libre';
@@ -72,6 +82,12 @@ class LiveReserva extends Component
                 $this->reserva_actual->mesa_id = $this->mesa_id;
                 $this->reserva_actual->save();
 
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Modificó una reserva',
+                    'user_id'=>Auth::user()->id
+                ]);
 
                 $mesa = Mesa::find($this->mesa_id);
                 $mesa->estado = $this->estado=='Concluida'?'Ocupado':'Reservado';
@@ -105,7 +121,16 @@ class LiveReserva extends Component
         $mesa = Mesa::find($this->reserva_actual->mesa_id);
         $mesa->estado = 'Libre';
         $mesa->save();
+
         $this->reserva_actual->delete();
+
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Eliminó una reserva',
+            'user_id'=>Auth::user()->id
+        ]);
+
         $this->eliminar=false;
     }
 

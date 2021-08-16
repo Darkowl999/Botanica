@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Plato;
 
+use App\Models\Bitacora;
 use App\Models\Plato;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LivePlato extends Component
@@ -38,6 +41,13 @@ class LivePlato extends Component
                     'estado' => 'Disponible',
                     'cantidad' => $this->cantidad,
                 ]);
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Creó un plato',
+                    'user_id'=>Auth::user()->id
+                ]);
+
             } else {
                 $this->plato_actual->nombre=$this->nombre;
                 $this->plato_actual->descripcion=$this->descripcion;
@@ -45,6 +55,13 @@ class LivePlato extends Component
                 $this->plato_actual->estado=$this->estado;
                 $this->plato_actual->cantidad=$this->cantidad;
                 $this->plato_actual->save();
+
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Modificó un plato',
+                    'user_id'=>Auth::user()->id
+                ]);
 
             }
         } catch (\Exception $e) {
@@ -83,5 +100,12 @@ class LivePlato extends Component
     public function elimiarPlato(){
         $this->plato_actual->delete();
         $this->eliminar=false;
+
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Eliminó un plato',
+            'user_id'=>Auth::user()->id
+        ]);
     }
 }

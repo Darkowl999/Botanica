@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(\route('login'));
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('/platos',\App\Http\Livewire\Plato\LivePlato::class)->name("platos");
     Route::get('/reservas',\App\Http\Livewire\Reserva\LiveReserva::class)->name("reservas");
     Route::get('/recibos',\App\Http\Livewire\Recibo\LiveRecibo::class)->name("recibos");
+    Route::get('/bitacoras',\App\Http\Livewire\Bitacora\LiveBitacora::class)->name("bitacoras");
 });
 
 

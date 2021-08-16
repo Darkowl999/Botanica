@@ -84,7 +84,7 @@
                     </div>
                     @if($mesa->estado==='Libre')
                         <div class="flex justify-between pt-5">
-                            <x-jet-button wire:click="eliminar" wire:click="$toggle('mesaModal')" type="button"
+                            <x-jet-button wire:click="eliminar" type="button"
                                           class="order-first bg-red-500 hover:bg-red-400 focus:bg-red-700">Eliminar
                             </x-jet-button>
                             <x-jet-button wire:click="$toggle('mesaModal')" class="order-last">Guardar</x-jet-button>

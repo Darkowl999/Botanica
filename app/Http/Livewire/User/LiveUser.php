@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Bitacora;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LiveUser extends Component
@@ -44,6 +47,12 @@ class LiveUser extends Component
                     'telefono' => $this->telefono,
                     'rol' => $this->rol,
                 ]);
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Creó un usuario',
+                    'user_id'=>Auth::user()->id
+                ]);
             } else {
                 $this->user_actual->name=$this->name;
                 $this->user_actual->email=$this->email;
@@ -52,6 +61,13 @@ class LiveUser extends Component
                 $this->user_actual->telefono=$this->telefono;
                 $this->user_actual->rol=$this->rol;
                 $this->user_actual->save();
+
+                Bitacora::create([
+                    'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+                    'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+                    'accion'=>'Modificó un usuario',
+                    'user_id'=>Auth::user()->id
+                ]);
             }
         } catch (\Exception $e) {
 
@@ -92,6 +108,12 @@ class LiveUser extends Component
     }
     public function eliminarUser(){
         $this->user_actual->delete();
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Eliminó un usuario',
+            'user_id'=>Auth::user()->id
+        ]);
         $this->eliminar=false;
     }
 

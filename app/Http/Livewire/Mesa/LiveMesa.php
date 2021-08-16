@@ -4,7 +4,10 @@ namespace App\Http\Livewire\Mesa;
 
 use App\Models\Area;
 
+use App\Models\Bitacora;
 use App\Models\Mesa;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LiveMesa extends Component
@@ -42,6 +45,14 @@ class LiveMesa extends Component
         $this->mesa->capacidad = $this->capacidad;
         $this->mesa->area_id = $this->area_id;
         $this->mesa->save();
+
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Modificó una mesa',
+            'user_id'=>Auth::user()->id
+        ]);
+
         $this->reset(['capacidad', 'area_id']);
     }
 
@@ -52,12 +63,25 @@ class LiveMesa extends Component
             'estado' => 'Libre',
             'area_id' => $this->area_id == null ? 1 : $this->area_id
         ]);
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Creó una mesa',
+            'user_id'=>Auth::user()->id
+        ]);
         $this->reset(['capacidad', 'area_id']);
     }
 
     public function eliminar()
     {
         $this->mesa->delete();
+        Bitacora::create([
+            'fecha'=>Carbon::now('America/La_Paz')->toDateString(),
+            'hora'=>Carbon::now('America/La_Paz')->toTimeString(),
+            'accion'=>'Eliminó una mesa',
+            'user_id'=>Auth::user()->id
+        ]);
+        $this->mesaModal=false;
         $this->reset('mesa');
     }
 }
